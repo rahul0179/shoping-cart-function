@@ -1,6 +1,6 @@
 
 function updateProductNumber(id, sign, totalId) {
-    const productInput = document.getElementById(id);
+    const productInput = document.getElementById(id + "-Num");
     let productNumber = productInput.value;
 
     if (sign == true) {
@@ -27,35 +27,62 @@ function updateProductNumber(id, sign, totalId) {
 
     }
 
+    // calculate totalcal
+    calculateTotal();
+
 
 }
+
+// total cash function 
+
+function getInputValue(id) {
+    const productInput = document.getElementById(id + "-Num");
+
+    const productNumber = parseInt(productInput.value);
+    return productNumber;
+
+
+
+}
+
+function calculateTotal() {
+    const phoneTotal = getInputValue("iphone") * 1219;
+    const caseTotlal = getInputValue("case") * 59;
+    const subTotal = phoneTotal + caseTotlal;
+    const tax = subTotal / 10;
+    const total = subTotal + tax;
+
+    // update intha html 
+    document.getElementById("subtotal").innerText = subTotal;
+    document.getElementById("tax").innerText = tax;
+    document.getElementById("total").innerText = total;
+
+}
+
+
+
 
 // iPhone 11 Silicone Case - Black quantity 
 
 document.getElementById("case-plus").addEventListener('click', function () {
-    const caseInput = updateProductNumber('caseNum', true, "caseValue");
-    console.log(caseInput);
+    const caseInput = updateProductNumber('case', true, "caseValue");
+
 
 
 
 })
 
 document.getElementById("case-minuse").addEventListener('click', function () {
-    const caseInput = updateProductNumber('caseNum', false, "caseValue");
+    const caseInput = updateProductNumber('case', false, "caseValue");
 
 })
 
 
 // iPhone 11 128GB Black quentity
 document.getElementById("iphone-minus").addEventListener('click', function () {
-    const iphoneNum = updateProductNumber("iphoneNum", false, "iphoneValue")
+    const iphoneNum = updateProductNumber("iphone", false, "iphoneValue")
 })
 document.getElementById("iphone-plus").addEventListener('click', function () {
-    const iphoneNum = updateProductNumber("iphoneNum", true, "iphoneValue");
+    const iphoneNum = updateProductNumber("iphone", true, "iphoneValue");
 })
 
-
-// clear button 
-document.getElementById('remove').addEventListener('click', function () {
-    console.log("click remove button");
-})
